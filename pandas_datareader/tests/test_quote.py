@@ -25,6 +25,6 @@ def test_quote_valid():
         assert int(row['Volume']) == row['Volume'] and row['Volume'] > 0
 
 def test_quote_invalid():
-    with pytest.raises(Exception):
+    with pytest.raises(RemoteDataError):
         df = quote('^XXX')
 
