@@ -8,7 +8,7 @@ def test_quote_valid():
     df = quote('QQQ')
     assert not any(df.isnull())
     for row in df.iterrows():
-        assert 'Date' in row
+        #assert 'Date' in row # Date column is our index, so it'll never appear
         assert 'Open' in row
         assert 'High' in row
         assert 'Low' in row
@@ -16,7 +16,7 @@ def test_quote_valid():
         assert 'AdjClose' in row
         assert 'Volume' in row
 
-        assert datetime.date.strptime(FORMAT, row['Date'])
+        assert datetime.date.strptime(FORMAT, row[0])
         assert float(row['Open']) > 0.0 and re.search('\.[0-9][0-9]$', row['Open']) is not None
         assert float(row['High']) > 0.0 and re.search('\.[0-9][0-9]$', row['High']) is not None
         assert float(row['Low']) > 0.0 and re.search('\.[0-9][0-9]$', row['Low']) is not None
